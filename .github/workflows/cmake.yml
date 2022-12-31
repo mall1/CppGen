@@ -26,6 +26,7 @@ jobs:
       uses: aminya/setup-cpp@v1
       with:
         cmake: true
+        ninja: true
     - name: Cache vcpkg
       id: cache-vcpkg
       uses: actions/cache@v3
