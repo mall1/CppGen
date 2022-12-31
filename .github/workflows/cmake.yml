@@ -2,9 +2,9 @@ name: CMake
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "testci" ]
   pull_request:
-    branches: [ "main" ]
+    branches: [ "testci" ]
 
 env:
   # Customize the CMake build type here (Release, Debug, RelWithDebInfo, etc.)
@@ -18,8 +18,14 @@ jobs:
     runs-on: self-hosted
     steps:
     - uses: actions/checkout@v3
-    - name: Setup Cpp (C++ / C)
-      uses: aminya/setup-cpp@v0.24.1
+    - name: Setup Cpp
+      uses: aminya/setup-cpp@v1
+      with:
+        compiler: gcc
+        cmake: true
+        ninja: true
+        cppcheck: true
+        clangtidy: true # instead of `true`, which chooses the default version, you can pass a specific version.
     - name: Cache vcpkg
       id: cache-vcpkg
       uses: actions/cache@v3
