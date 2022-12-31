@@ -21,7 +21,7 @@ jobs:
     - name: Setup Cpp
       uses: aminya/setup-cpp@v1
       with:
-        compiler: gcc
+        compiler: llvm
         cmake: true
         ninja: true
         cppcheck: true
