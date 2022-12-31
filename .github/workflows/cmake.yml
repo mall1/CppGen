@@ -18,10 +18,8 @@ jobs:
     runs-on: self-hosted
     steps:
     - uses: actions/checkout@v3
-    - name: get-cmake
-      uses: lukka/get-cmake@local-cache
-    - name: Install GCC
-      uses: egor-tensin/setup-gcc@v1
+    - name: Setup Cpp (C++ / C)
+      uses: aminya/setup-cpp@v0.24.1
     - name: Cache vcpkg
       id: cache-vcpkg
       uses: actions/cache@v3
