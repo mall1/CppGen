@@ -1,0 +1,1 @@
+<img src="https://raw.githubusercontent.com/mall1/cppgen/main/docs/logo.svg?sanitize=true" alt="CppGen Logo" style="max-width: 100%;" height="140">

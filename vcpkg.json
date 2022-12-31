@@ -1,0 +1,9 @@
+{
+    "name": "cppgen",
+    "version-string": "0.0.1",
+    "dependencies": [
+      { "name": "llvm" },
+      { "name": "yaml-cpp" },
+      { "name": "magic-enum" }
+    ]
+  }
