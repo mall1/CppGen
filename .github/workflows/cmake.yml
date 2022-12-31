@@ -23,9 +23,6 @@ jobs:
       with:
         compiler: llvm
         cmake: true
-        ninja: true
-        cppcheck: true
-        clangtidy: true # instead of `true`, which chooses the default version, you can pass a specific version.
     - name: Cache vcpkg
       id: cache-vcpkg
       uses: actions/cache@v3
