@@ -25,7 +25,7 @@ jobs:
     - name: Setup Cpp
       uses: aminya/setup-cpp@v1
       with:
-        compiler: gcc-11
+
         cmake: true
         ninja: true
     - name: Cache vcpkg
