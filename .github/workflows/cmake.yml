@@ -22,7 +22,8 @@ jobs:
       uses: KyleMayes/install-llvm-action@v1
       with:
         version: "10.0"
-
+    - name: install make
+      run: sudo apt-get install make
     - name: Setup Cpp
       uses: aminya/setup-cpp@v1
       with:
