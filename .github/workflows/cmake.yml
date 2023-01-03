@@ -22,13 +22,12 @@ jobs:
       uses: KyleMayes/install-llvm-action@v1
       with:
         version: "10.0"
-    - name: install make
-      run: sudo apt-get install make gcc g++
+    - name: Setup C++ environment
+      uses: kurocha/setup-cpp@v1
 
     - name: Setup Cpp
       uses: aminya/setup-cpp@v1
       with:
-
         cmake: true
         ninja: true
     - name: Cache vcpkg
