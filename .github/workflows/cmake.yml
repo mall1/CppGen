@@ -22,12 +22,11 @@ jobs:
       uses: KyleMayes/install-llvm-action@v1
       with:
         version: "10.0"
-    - name: Setup C++ environment
-      uses: kurocha/setup-cpp@v1
 
     - name: Setup Cpp
       uses: aminya/setup-cpp@v1
       with:
+        compiler: llvm
         cmake: true
         ninja: true
     - name: Cache vcpkg
