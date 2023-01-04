@@ -50,6 +50,7 @@ jobs:
           mkdir -p build/fetched
           cd build/fetched
           wget -c https://github.com/mall1/CppGen/releases/download/libclang/libclang-bin.tar -O - | tar -xv
+          ls .
           ls libclang-bin
           cd libclang-bin/LLVM
       - name: Cache
