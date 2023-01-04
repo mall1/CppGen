@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - main
-      - master
 
 jobs:
   Test:
@@ -18,13 +17,39 @@ jobs:
           - macos-12
         compiler:
           - llvm
-          - gcc
           # you can specify the version after `-` like `llvm-13.0.0`.
         include:
           - os: "windows-2022"
             compiler: "msvc"
     steps:
       - uses: actions/checkout@v3
+      - name: install wget on windows-2022
+        if: ${{ contains(matrix.os, 'windows') }}
+        run: |
+          choco install wget
+      - name: replace vcpkg.json on macos
+        run: |
+          cat vcpkg.json
+          mv vcpkg.json _vcpkg.json
+          cat _vcpkg.json | sed  '/llvm/d'  > vcpkg.json
+          cat vcpkg.json
+          rm -f _vcpkg.json
+        if: ${{ contains(matrix.os, 'macos') }}
+      - name: replace vcpkg.json on ubuntu
+        run: |
+          sed -i '/llvm/d' vcpkg.json
+        if: ${{ contains(matrix.os, 'ubuntu') }}
+      - name: replace vcpkg.json on windows
+        run: |
+          sed -i '/llvm/d' vcpkg.json
+        if: ${{ contains(matrix.os, 'windows') }}
+      - name: download libclang binary
+        run: |
+          mkdir -p build/fetched
+          cd build/fetched
+          wget https://github.com/mall1/CppGen/releases/download/libclang/libclang-bin.tar
+          tar -xvf libclang-bin.tar
+
       - name: Cache
         uses: actions/cache@v3
         with:
@@ -53,7 +78,7 @@ jobs:
       - name: Configure CMake
         # Configure CMake in a 'build' subdirectory. `CMAKE_BUILD_TYPE` is only required if you are using a single-configuration generator such as make.
         # See https://cmake.org/cmake/help/latest/variable/CMAKE_BUILD_TYPE.html?highlight=cmake_build_type
-        run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DCMAKE_TOOLCHAIN_FILE=~/vcpkg/scripts/buildsystems/vcpkg.cmake
+        run: cmake -B build -DHACK_USE_LIBCLANG_BINARY=ON
       - name: Build
         # Build your program with the given configuration
-        run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}}
+        run: cmake --build build

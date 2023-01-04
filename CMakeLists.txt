@@ -13,7 +13,7 @@ else()
         include(FetchContent)
         FetchContent_Declare(vcpkg
             GIT_REPOSITORY https://github.com/microsoft/vcpkg/
-            GIT_TAG 2022.09.27
+            GIT_TAG 2022.11.14
             SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/build/fetched/vcpkg
         )
         FetchContent_populate(vcpkg)
@@ -35,9 +35,13 @@ target_include_directories(${PROJECT_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/in
 target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/source)
 
 # The package llvm provides CMake targets:
+option(HACK_USE_LIBCLANG_BINARY "Do not set, it's just a hack" OFF)
+if(HACK_USE_LIBCLANG_BINARY)
+include(build/fetched/libclang-bin/libclang.cmake)
+else()
 find_package(Clang REQUIRED)
 target_link_libraries(${PROJECT_NAME} PRIVATE libclang)
-
+endif()
 # magic-enum provides CMake targets:
 
 # this is heuristically generated, and may not be correct
