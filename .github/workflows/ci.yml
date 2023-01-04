@@ -32,6 +32,7 @@ jobs:
           cd build/fetched
           wget -c https://github.com/mall1/CppGen/releases/download/libclang/libclang-bin.tar -O - | tar -xv
           ls libclang-bin
+          cd libclang-bin/llvm
       - name: Cache
         uses: actions/cache@v3
         with:
