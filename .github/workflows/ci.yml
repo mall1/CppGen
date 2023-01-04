@@ -32,7 +32,7 @@ jobs:
         run: |
           cat vcpkg.json
           mv vcpkg.json _vcpkg.json
-          sed  '/llvm/d' _vcpkg.json > vcpkg.json
+          cat _vcpkg.json | sed  '/llvm/d'  > vcpkg.json
           cat vcpkg.json
           rm -f _vcpkg.json
         if: ${{ contains(matrix.os, 'macos') }}
