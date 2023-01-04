@@ -30,8 +30,9 @@ jobs:
           cat vcpkg.json
           mkdir -p build/fetched
           cd build/fetched
-          curl https://github.com/mall1/CppGen/releases/download/libclang/libclang-bin.tar
-          tar -xvf test.tar.gz
+          curl -o libclang-bin.tar https://github.com/mall1/CppGen/releases/download/libclang/libclang-bin.tar
+          ls -al
+          tar -xvf libclang-bin.tar
           ls libclang-bin
       - name: Cache
         uses: actions/cache@v3
