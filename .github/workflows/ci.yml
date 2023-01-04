@@ -49,7 +49,7 @@ jobs:
           mkdir -p build/fetched
           cd build/fetched
           wget https://github.com/mall1/CppGen/releases/download/libclang/libclang-bin.tar
-          tar -xv libclang-bin.tar
+          tar -xvf libclang-bin.tar
 
       - name: Cache
         uses: actions/cache@v3
