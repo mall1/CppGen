@@ -1,6 +1,6 @@
 #pragma once
 
-#include <clang-c/Index.h>
+#include "clang-c/Index.h"
 
 #include <memory>
 #include <string>
