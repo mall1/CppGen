@@ -3,8 +3,7 @@ on:
   pull_request:
   push:
     branches:
-      - main
-      - master
+      - testci
 
 jobs:
   Test:
@@ -25,6 +24,15 @@ jobs:
             compiler: "msvc"
     steps:
       - uses: actions/checkout@v3
+      - name: download libclang binary
+        run: |
+          sed -i '/llvm/d' vcpkg.json
+          cat vcpkg.json
+          mkdir build/fetched
+          cd build/fetched
+          curl https://github.com/mall1/CppGen/releases/download/libclang/libclang-bin.tar
+          tar -xvf test.tar.gz
+          ls libclang-bin
       - name: Cache
         uses: actions/cache@v3
         with:
