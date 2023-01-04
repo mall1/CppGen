@@ -46,13 +46,11 @@ jobs:
         if: ${{ contains(matrix.os, 'windows') }}
       - name: download libclang binary
         run: |
-          cat vcpkg.json
           mkdir -p build/fetched
           cd build/fetched
-          wget -c https://github.com/mall1/CppGen/releases/download/libclang/libclang-bin.tar -O - | tar -xv
-          ls .
-          ls libclang-bin
-          cd libclang-bin/LLVM
+          wget https://github.com/mall1/CppGen/releases/download/libclang/libclang-bin.tar
+          tar -xv libclang-bin.tar
+
       - name: Cache
         uses: actions/cache@v3
         with:
