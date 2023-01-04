@@ -27,11 +27,21 @@ jobs:
       - name: install wget on windows-2022
         if: ${{ contains(matrix.os, 'windows') }}
         run: |
-          winget install wget
-
-      - name: download libclang binary
+          choco install wget
+      - name: replace vcpkg.json on macos
+        run: |
+          cat vcpkg.json
+          mv vcpkg.json _vcpkg.json
+          sed  '/llvm/d' _vcpkg.json > vcpkg.json
+          cat vcpkg.json
+          rm -f _vcpkg.json
+        if: ${{ contains(matrix.os, 'macos') }}
+      - name: replace vcpkg.json on ubuntu
         run: |
           sed -i '/llvm/d' vcpkg.json
+        if: ${not { contains(matrix.os, 'macos') }}
+      - name: download libclang binary
+        run: |
           cat vcpkg.json
           mkdir -p build/fetched
           cd build/fetched
