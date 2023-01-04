@@ -39,7 +39,11 @@ jobs:
       - name: replace vcpkg.json on ubuntu
         run: |
           sed -i '/llvm/d' vcpkg.json
-        if: ${{ contains(matrix.os, 'ubuntu') }} || ${{ contains(matrix.os, 'windows') }}
+        if: ${{ contains(matrix.os, 'ubuntu') }}
+      - name: replace vcpkg.json on windows
+        run: |
+          sed -i '/llvm/d' vcpkg.json
+        if: ${{ contains(matrix.os, 'windows') }}
       - name: download libclang binary
         run: |
           cat vcpkg.json
