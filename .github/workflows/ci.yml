@@ -24,6 +24,11 @@ jobs:
             compiler: "msvc"
     steps:
       - uses: actions/checkout@v3
+      - name: install wget on windows-2022
+        if: ${{ contains(matrix.os, 'windows') }}
+        run: |
+          winget install wget
+
       - name: download libclang binary
         run: |
           sed -i '/llvm/d' vcpkg.json
