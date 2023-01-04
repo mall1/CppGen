@@ -28,7 +28,7 @@ jobs:
         run: |
           sed -i '/llvm/d' vcpkg.json
           cat vcpkg.json
-          mkdir build/fetched
+          mkdir -p build/fetched
           cd build/fetched
           curl https://github.com/mall1/CppGen/releases/download/libclang/libclang-bin.tar
           tar -xvf test.tar.gz
